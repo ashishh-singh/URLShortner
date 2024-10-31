@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const {connectionDB} = require("./connection")
-const port = 6005;
+const port = process.env.PORT || 6005;
 const path = require("path")
 const URL = require("./models/url")
 const Urlroute = require("./Routes/url")
