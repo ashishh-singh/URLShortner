@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrlShort</title>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <h1 style="color:green; text-decoration: double; text-align:center;">URL SHORTNER</h1>
+    <button class="logout-button" onclick="window.location.href='/'">Logout</button>
+
+    
+    <div class="container">
+       
+    <form id="reset" action="/url" method="POST" onsubmit="resetform()">
+       
+        <label for="url"><h3>Enter URL</h3></label>
+        <input type="text" name="url" placeholder="https:/example.com/" required>
+        <button type="submit">Generate URL</button>
+        
+    </form>
+    <div class="hideurl" style="display: block;">
+    <% if (locals.id) { %>
+        <p>URL Generated: <a href="http://localhost:6005/url/<%= id %>" target="_blank" rel="noopener noreferrer">http://localhost:6005/url/<%= id %></a> </p>
+        <button onclick="hideUrl()">Remove</button>
+     
+    <% } %>
+    
+</div>
+
+
+    <button id="text" onclick="history()">Show History</button>
+
+    <div id="his" style="margin: 10px; padding: 20px;font-weight: bolder; color:black; display: none;">
+        
+      
+         
+        
+        <% if (locals.url) { %>
+            <table>
+               <h1> <thead>
+                    
+                    <th> S .No</th>
+                    <th>ShortId</th>
+                    <th>OriginalUrl</th>
+                    <th>Clicks</th>
+               
+                </thead>
+                </h1>
+                <tbody>
+                    
+                    <% url.forEach((url,index) => { %>
+                        <tr>
+                        <td><%= index+1 %></td>
+                        <td><a href="http://localhost:6005/url/<%= url.ShortId %>" target="_blank"><%= url.ShortId %></a></td>
+                        <td><%= url.OriginalUrl %></td>
+                        <!-- <td><%= url.visit %></td> -->
+                    </tr>
+                     
+                    <% }) %>
+               
+                </tbody>
+            </table>
+         
+        <% } %>
+      
+    </div>
+</div>
+  
+    
+
+<script>
+    function resetform(){
+        document.getElementById(reset).reset();
+        return true;
+    }
+    function history(){
+        const dis = document.getElementById("his");
+        const buttonText = document.getElementById("text");
+        console.log(buttonText.innerText)
+    
+        buttonText.innerText = buttonText.innerText ==="Show History" ? "Remove History" : "Show History";
+
+        dis.style.display = (dis.style.display == "none" || dis.style.display == "") ? "block" : "none";
+
+    }  
+    function hideUrl(){
+        const url = document.querySelector(".hideurl")
+        // url.style.backgroundColor = "white"
+        url.style.display = (url.style.display=="none" || url.style.display=="") ? "block" : "none";
+    }
+   </script>
+</body>
+</html>
+          
