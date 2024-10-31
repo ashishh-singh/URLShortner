@@ -27,8 +27,10 @@ app.get("/find/user",async (req,res) => {
 
 //     return res.json(data)
 // })
+let url = process.env.MONGODB_URI
+// "mongodb+srv://Ashish:Myurlproject@url1.nb2sm.mongodb.net/urls?retryWrites=true&w=majority&appName=URL1"
 
-connectionDB("mongodb+srv://Ashish:Myurlproject@url1.nb2sm.mongodb.net/urls?retryWrites=true&w=majority&appName=URL1", { useNewUrlParser: true, useUnifiedTopology: true })
+connectionDB(url, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
