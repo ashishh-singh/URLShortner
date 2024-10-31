@@ -28,9 +28,11 @@ app.get("/find/user",async (req,res) => {
 //     return res.json(data)
 // })
 
+connectionDB("mongodb+srv://Ashish:Myurlproject@url1.nb2sm.mongodb.net/urls?retryWrites=true&w=majority&appName=URL1", { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
-
-connectionDB("mongodb://localhost:27017/urls").then(() => console.log("connect to Db successfuly")).catch(err => console.log(` not connected error ${err}`));
+// connectionDB("mongodb://localhost:27017/urls").then(() => console.log("connect to Db successfuly")).catch(err => console.log(` not connected error ${err}`));
 
 app.get("/url/:shortId", async(req,res) => {
     const newShortid = req.params.shortId;
